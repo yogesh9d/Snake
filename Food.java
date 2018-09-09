@@ -22,7 +22,8 @@ public class Food {
         } while (!isFoodValid());
         isEaten = false;
     }
-
+    
+//     CONDITION TO CHECK OVERLAPPING OF SNAKE AND FOOD
     boolean isFoodValid() {
         for (int i = 0; i < snake.x.size(); i++)
         if (snake.x.get(i) == foodX && snake.y.get(i) == foodY )
