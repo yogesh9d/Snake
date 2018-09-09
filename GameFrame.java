@@ -12,7 +12,7 @@ public class GameFrame extends Applet implements MouseListener, MouseMotionListe
     Font font;
 
     /**************Safe Modify****************/
-    float fps = (float) 4;  // DEFAULT GAME SPEED
+    float fps = (float) 6;  // DEFAULT GAME SPEED
     int initialLength = 3;  // DEFAULT INITIAL SNAKE LENGTH
 
     Color headColor = Color.blue;
