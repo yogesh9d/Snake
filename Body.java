@@ -6,20 +6,18 @@ public class Body {
 
     boolean gameOver = false;
 
-    int x_limit = 100;
-    int y_limit = 100;
+    int frameXLimit;
+    int frameYLimit;
 
     int clearX = 0;
     int clearY = 0;
 
-    boolean alive = true;
+    public Body(int length, int frameXLimit, int frameYLimit) {
+        this.frameXLimit = frameXLimit;
+        this.frameYLimit = frameYLimit;
 
-    public Body(int length, int x_limit, int y_limit) {
-        this.x_limit = x_limit;
-        this.y_limit = y_limit;
-
-        int baseX = Math.round(x_limit / 2);
-        int baseY = Math.round(y_limit / 2);
+        int baseX = Math.round(frameXLimit / 2);
+        int baseY = Math.round(frameYLimit / 2);
 
         x.addLast(baseX);
         y.addLast(baseY);
@@ -31,26 +29,26 @@ public class Body {
     }
 
     boolean isAliveee() {
-        System.out.println("checking if allive");
+//        System.out.println("checking if alive"); //DEBUG
         for (int i = 0; i < x.size(); i++)
-            x.set(i, (x.get(i) + x_limit) % x_limit);
+            x.set(i, (x.get(i) + frameXLimit) % frameXLimit);
 
         for (int i = 0; i < y.size(); i++)
-            y.set(i, (y.get(i) + y_limit) % y_limit);
+            y.set(i, (y.get(i) + frameYLimit) % frameYLimit);
 
         for (int i = 0; i < x.size(); i++) {
             for (int j = 0; j < y.size(); j++) {
                 if (i != j && x.get(i).intValue() == x.get(j).intValue() && y.get(i).intValue() == y.get(j).intValue()) {
-                    alive = false;
-                    break;
+//                    System.out.println(i + " - " +j);
+                    return false;
                 }
             }
         }
-        return alive;
+        return true;
     }
 
-    public void RemoveTail() {
-        System.out.println("removing tail");
+    public void removeTail() {
+//        System.out.println("removing tail"); //DEBUG
         clearX = x.getLast();
         clearY = y.getLast();
         if (x.size() != 0)
@@ -59,8 +57,15 @@ public class Body {
             y.removeLast();
     }
 
+    public void addTail() {
+//        System.out.println("adding tail"); //DEBUG
+        x.addLast(clearX);
+        y.addLast(clearY);
+    }
+
+
     public void addHead(Character direction) {
-        System.out.println("adding head");
+//        System.out.println("adding head"); //DEBUG
         Integer x = this.x.getFirst();
         Integer y = this.y.getFirst();
         switch (direction) {
@@ -81,34 +86,8 @@ public class Body {
                 break;
             }
         }
-        System.out.println("putting module at ( " + x + ", " + y + ")");
+//        System.out.println("putting module at ( " + x + ", " + y + ")"); //DEBUG
         this.x.addFirst(x);
         this.y.addFirst(y);
     }
-
-//    public void addTail(Character direction) {
-//        Integer x = this.x.getLast();
-//        Integer y = this.y.getLast();
-//        switch (direction) {
-//            case 'w': {
-//                y-=10;
-//                break;
-//            }
-//            case 'a': {
-//                x-=10;
-//                break;
-//            }
-//            case 's': {
-//                y+=10;
-//                break;
-//            }
-//            case 'd': {
-//                x+=10;
-//                break;
-//            }
-//        }
-//        this.x.addLast(x);
-//        this.y.addLast(y);
-//    }
-
 }
