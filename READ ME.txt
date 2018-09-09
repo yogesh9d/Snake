@@ -1,0 +1,29 @@
+SNAKE GAME
+
+The game is created using applets and multithreadding.
+As it involves multithreadding it's performance might 
+vary time to time and may rarely terminate unexpectedly.
+report the bugs on - https://goo.gl/forms/Sxlk8pEe20AjcbN92
+
+MAIN FILE - "GameFrame.java"/"GameFrame.class"
+
+Default Controls:
+  up - w
+  left - a
+  right - d
+  down - s
+
+Game rules:
+1. The only way to die is if the snake eats itself.
+2. There are no boundaries or walls.
+3. The score is equal to multiples of 7 of 
+   initial length of snake.
+   
+
+Things that can be modified(Safe Modify section):
+1. To modify speed increase the "fps" value in "GameFrame.java",
+   fps value is directly proportional to speed.
+2. Initial snake length (not more than 70).
+3. The colours of different components can be modified.
+
+Game created by - B.Yogesh
