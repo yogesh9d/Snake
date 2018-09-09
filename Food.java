@@ -25,8 +25,8 @@ public class Food {
 
     boolean isFoodValid() {
         for (int i = 0; i < snake.x.size(); i++)
-            if ((snake.x.get(i) <= (foodX + 10) && snake.x.get(i) >= foodX) && (snake.y.get(i) <= (foodY + 10) && snake.y.get(i) >= foodY))
-                return false;
+        if (snake.x.get(i) == foodX && snake.y.get(i) == foodY )
+            return false;
         return true;
     }
 }
