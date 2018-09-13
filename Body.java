@@ -4,53 +4,45 @@ public class Body {
     public LinkedList<Integer> x = new LinkedList<>();
     public LinkedList<Integer> y = new LinkedList<>();
 
-    boolean gameOver = false;
+    GameFrame gameFrame;
 
-    int frameXLimit;
-    int frameYLimit;
+    int deadX = 0;
+    int deadY = 0;
 
-    int clearX = 0;
-    int clearY = 0;
+    public Body(GameFrame gameFrame){
 
-    public Body(int length, int frameXLimit, int frameYLimit) {
-        this.frameXLimit = frameXLimit;
-        this.frameYLimit = frameYLimit;
+        this.gameFrame = gameFrame;
 
-        int baseX = Math.round(frameXLimit / 2);
-        int baseY = Math.round(frameYLimit / 2);
+        x.addLast(Math.round(gameFrame.frameXLimit / 2));
+        y.addLast(Math.round(gameFrame.frameYLimit / 2));
 
-        x.addLast(baseX);
-        y.addLast(baseY);
-        length--;
+        int len = gameFrame.initialLength-1;
 
-        while (length-- != 0) {
-            addHead('d');
-        }
+        while (len-- != 0)
+            addHead(gameFrame.initialDirection);
+
     }
 
     boolean isAliveee() {
 //        System.out.println("checking if alive"); //DEBUG
-        for (int i = 0; i < x.size(); i++)
-            x.set(i, (x.get(i) + frameXLimit) % frameXLimit);
 
-        for (int i = 0; i < y.size(); i++)
-            y.set(i, (y.get(i) + frameYLimit) % frameYLimit);
-
+/*************************CHECKING FOR OVERLAP*****************************/
         for (int i = 0; i < x.size(); i++) {
             for (int j = 0; j < y.size(); j++) {
                 if (i != j && x.get(i).intValue() == x.get(j).intValue() && y.get(i).intValue() == y.get(j).intValue()) {
-//                    System.out.println(i + " - " +j);
+//                    System.out.println(i + " - " + j);
                     return false;
                 }
             }
         }
         return true;
+
     }
 
     public void removeTail() {
 //        System.out.println("removing tail"); //DEBUG
-        clearX = x.getLast();
-        clearY = y.getLast();
+        deadX = x.getLast();
+        deadY = y.getLast();
         if (x.size() != 0)
             x.removeLast();
         if (y.size() != 0)
@@ -59,33 +51,28 @@ public class Body {
 
     public void addTail() {
 //        System.out.println("adding tail"); //DEBUG
-        x.addLast(clearX);
-        y.addLast(clearY);
+        x.addLast(deadX);
+        y.addLast(deadY);
     }
 
 
     public void addHead(Character direction) {
 //        System.out.println("adding head"); //DEBUG
-        Integer x = this.x.getFirst();
-        Integer y = this.y.getFirst();
-        switch (direction) {
-            case 'w': {
-                y -= 10;
-                break;
-            }
-            case 'a': {
-                x -= 10;
-                break;
-            }
-            case 's': {
-                y += 10;
-                break;
-            }
-            case 'd': {
-                x += 10;
-                break;
-            }
-        }
+        int x = this.x.getFirst();
+        int y = this.y.getFirst();
+
+        if(direction == gameFrame.up)
+            y-=10;
+        else if(direction == gameFrame.down)
+            y+=10;
+        else if(direction == gameFrame.left)
+            x-=10;
+        else if(direction == gameFrame.right)
+            x+=10;
+
+//        ENSURING NO PART GOES OUT OF FRAME
+        x = (x + gameFrame.frameXLimit) % gameFrame.frameXLimit;
+        y = (y + gameFrame.frameYLimit) % gameFrame.frameYLimit;
 //        System.out.println("putting module at ( " + x + ", " + y + ")"); //DEBUG
         this.x.addFirst(x);
         this.y.addFirst(y);
