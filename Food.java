@@ -1,33 +1,31 @@
 public class Food {
-
     int foodX;
     int foodY;
-
-    Boolean isEaten;
+    boolean isEaten = false;
 
     Snake snake;
-    GameFrame theFrame;
+    GameFrame gameFrame;
 
-    public Food(Snake snake, GameFrame theFrame) {
+    public Food(Snake snake, GameFrame gameFrame) {
         this.snake = snake;
-        this.theFrame = theFrame;
+        this.gameFrame = gameFrame;
         createFood();
     }
 
     public void createFood() {
 //        System.out.println("creating food"); //DEBUG
         do {
-            foodX = Math.round((float) (Math.round(Math.random() * 100000) * 10) % (theFrame.frameXLimit - 10));
-            foodY = Math.round((float) (Math.round(Math.random() * 100000) * 10) % (theFrame.frameYLimit - 10));
+            foodX = Math.round((float) (Math.round(Math.random() * 100000) * 10) % (gameFrame.frameXLimit - 10));
+            foodY = Math.round((float) (Math.round(Math.random() * 100000) * 10) % (gameFrame.frameYLimit - 10));
         } while (!isFoodValid());
+
         isEaten = false;
     }
-    
-//     CONDITION TO CHECK OVERLAPPING OF SNAKE AND FOOD
+
     boolean isFoodValid() {
         for (int i = 0; i < snake.x.size(); i++)
-        if (snake.x.get(i) == foodX && snake.y.get(i) == foodY )
-            return false;
+            if (snake.x.get(i) == foodX && snake.y.get(i) == foodY )
+                return false;
         return true;
     }
 }
