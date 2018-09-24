@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 /*<applet code="GameFrame.class" width="710" height="510"> </applet>*/
 
+@SuppressWarnings({"deprecation", "serial"})
 
 public class GameFrame extends Applet implements MouseListener, MouseMotionListener, KeyListener, Runnable {
 
