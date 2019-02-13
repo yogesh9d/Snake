@@ -1,10 +1,5 @@
 SNAKE GAME
 
-The game is created using applets and multithreadding.
-As it involves multithreadding it's performance might 
-vary time to time and may rarely terminate unexpectedly.
-report the bugs on - https://goo.gl/forms/Sxlk8pEe20AjcbN92
-
 MAIN FILE - "GameFrame.java"/"GameFrame.class"
 
 Default Controls:
